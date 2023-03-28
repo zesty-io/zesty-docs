@@ -1,7 +1,6 @@
 const fs = require("fs");
 const axios = require("axios");
 const algoliasearch = require("algoliasearch");
-const fetch = require("node-fetch");
 
 const getMainCollection = async () => {
   const POSTMAN_JSON_DATA = [
@@ -185,28 +184,41 @@ const generateNavigationTree = (flattenedPages) => {
  * @returns a promise.
  */
 
-const getPageContent = async (path) => {
+const getPageContent = (path) => {
   console.log("=============================================");
 
   // Fetch Content
-  const resp = await fetch(
-    `https://raw.githubusercontent.com/zesty-io/zesty-docs/main/${path}.md`
-  );
+  return axios
+    .get(
+      `https://raw.githubusercontent.com/zesty-io/zesty-docs/main/${path}.md`
+    )
+    .then((resp) => {
+      console.log("resp", resp.status);
+      consoleLogs(resp, path);
 
-  consoleLogs(resp, path);
-  // If the file doesn't exist, fetch the parent directory's README.md file
-  const data =
-    resp.status === 200 ? await resp.text() : await getParentContent(path);
-
-  return data;
+      // If the file doesn't exist, fetch the parent directory's README.md file
+      if (resp.status === 200) {
+        return resp.data;
+      }
+    })
+    .catch(async (err) => {
+      consoleLogs(err, path);
+      return await getParentContent(path);
+    });
 };
 
 const getParentContent = async (path) => {
-  const resp = await fetch(
-    `https://raw.githubusercontent.com/zesty-io/zesty-docs/main/${path}/README.md`
-  );
-  consoleLogs(resp, `${path}/README`);
-  return await resp.text();
+  return axios
+    .get(
+      `https://raw.githubusercontent.com/zesty-io/zesty-docs/main/${path}/README.md`
+    )
+    .then((resp) => {
+      consoleLogs(resp, `${path}/README`);
+      return resp.data;
+    })
+    .catch((err) => {
+      consoleLogs(err, `${path}/README`);
+    });
 };
 
 /**
