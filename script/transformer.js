@@ -53,6 +53,8 @@ const addToAlgolia = async (req) => {
   const index = client.initIndex(INDEX);
   const gitBookPages = await getGitBookPages();
 
+  console.log(APPID, APIKEY, INDEX, GITBOOK_API_KEY);
+
   const objects = await flattenPages(gitBookPages.data.pages);
 
   // Only generate the index if the query param is set to true
