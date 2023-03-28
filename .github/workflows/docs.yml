@@ -9,6 +9,8 @@ permissions: write-all
 jobs:
   generate-data-for-docs:
     runs-on: ubuntu-latest
+    build:
+    environment: production
 
     steps:
       - name: Checkout code
