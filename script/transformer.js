@@ -51,9 +51,10 @@ const GITBOOK_API_KEY = process.env.GITBOOK_API_KEY;
 const addToAlgolia = async (req) => {
   const client = algoliasearch(APPID, APIKEY);
   const index = client.initIndex(INDEX);
-  const gitBookPages = await getGitBookPages();
 
   console.log("test", APPID, APIKEY, INDEX, GITBOOK_API_KEY);
+
+  const gitBookPages = await getGitBookPages();
 
   const objects = await flattenPages(gitBookPages.data.pages);
 
