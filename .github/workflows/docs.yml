@@ -10,6 +10,11 @@ jobs:
   generate-data-for-docs:
     runs-on: ubuntu-latest
 
+    env:
+      ALGOLIA_APPID: ${{ env.ALGOLIA_APPID }}
+      ALGOLIA_APIKEY: ${{ env.ALGOLIA_APIKEY }}
+      ALGOLIA_ZESTY_ORG_INDEX: ${{ env.ALGOLIA_ZESTY_ORG_INDEX }}
+      GITBOOK_API_KEY: ${{ env.GITBOOK_API_KEY }}
 
     steps:
       - name: Checkout code
@@ -24,6 +29,7 @@ jobs:
         run: npm install axios algoliasearch
 
       - name: Run Node function and create file
+        env:
           GITBOOK_API_KEY: ${{ env.GITBOOK_API_KEY }}
           ALGOLIA_APPID: ${{ env.ALGOLIA_APPID }}
           ALGOLIA_APIKEY: ${{ env.ALGOLIA_APIKEY }}
