@@ -1,6 +1,7 @@
 const fs = require("fs");
 const axios = require("axios");
 const algoliasearch = require("algoliasearch");
+const fetch = require("node-fetch");
 
 const getMainCollection = async () => {
   const POSTMAN_JSON_DATA = [
@@ -58,19 +59,17 @@ const addToAlgolia = async (req) => {
 
   const objects = await flattenPages(gitBookPages.data.pages);
 
-  // Only generate the index if the query param is set to true
-  if (req.query.generate === "true") {
-    await index
-      .replaceAllObjects(objects, {
-        autoGenerateObjectIDIfNotExist: true,
-      })
-      .then(({ objectIDs }) => {
-        console.log(objectIDs);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  // generate algolia
+  await index
+    .replaceAllObjects(objects, {
+      autoGenerateObjectIDIfNotExist: true,
+    })
+    .then(({ objectIDs }) => {
+      console.log(objectIDs);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   const gitbookTreeData = generateNavigationTree(objects);
 
@@ -190,7 +189,7 @@ const getPageContent = async (path) => {
   console.log("=============================================");
 
   // Fetch Content
-  const resp = await axios.get(
+  const resp = await fetch(
     `https://raw.githubusercontent.com/zesty-io/zesty-docs/main/${path}.md`
   );
 
@@ -203,7 +202,7 @@ const getPageContent = async (path) => {
 };
 
 const getParentContent = async (path) => {
-  const resp = await axios.get(
+  const resp = await fetch(
     `https://raw.githubusercontent.com/zesty-io/zesty-docs/main/${path}/README.md`
   );
   consoleLogs(resp, `${path}/README`);

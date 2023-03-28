@@ -20,13 +20,15 @@ jobs:
           node-version: "16.x"
 
       - name: Install dependencies
-        run: npm install axios algoliasearch
+        run: npm install axios algoliasearch node-fetch
 
       - name: Run Node function and create file
         env:
           GITBOOK_API_KEY: ${{ secrets.GITBOOK_API_KEY }}
           ALGOLIA_APPID: ${{ secrets.ALGOLIA_APPID }}
           ALGOLIA_APIKEY: ${{ secrets.ALGOLIA_APIKEY }}
+          ALGOLIA_ZESTY_ORG_INDEX: ${{ secrets.ALGOLIA_ZESTY_ORG_INDEX }}
+
         run: node script/transformer.js
 
       - name: Commit changes
