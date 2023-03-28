@@ -51,16 +51,7 @@ const GITBOOK_API_KEY = process.env.GITBOOK_API_KEY;
 const addToAlgolia = async (req) => {
   const client = algoliasearch(APPID, APIKEY);
   const index = client.initIndex(INDEX);
-  let gitBookPages;
-
-  // Get the pages from the GitBook API if cache is empty or if the query param is set to true
-  if (!cache.get("gitbookPages") || req.query.generate === "true") {
-    gitBookPages = await getGitBookPages();
-    cache.put("gitbookPages", gitBookPages, 1000 * 60 * 60 * 24); // store gitbook pages to memory as cache for 24 hours
-  } else {
-    console.log("cache hit");
-    gitBookPages = cache.get("gitbookPages");
-  }
+  const gitBookPages = await getGitBookPages();
 
   const objects = await flattenPages(gitBookPages.data.pages);
 
