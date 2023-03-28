@@ -24,9 +24,9 @@ jobs:
 
       - name: Run Node function and create file
         env:
-          GITBOOK_API_KEY: ${{ secrets.GITBOOK_API_KEY }}
-          ALGOLIA_APPID: ${{ secrets.ALGOLIA_APPID }}
-          ALGOLIA_APIKEY: ${{ secrets.ALGOLIA_APIKEY }}
+          GITBOOK_API_KEY: ${{ secrets.PRODUCTION_GITBOOK_API_KEY }}
+          ALGOLIA_APPID: ${{ secrets.PRODUCTION_ALGOLIA_APPID }}
+          ALGOLIA_APIKEY: ${{ secrets.PRODUCTION_ALGOLIA_APIKEY }}
         run: node script/transformer.js
 
       - name: Commit changes
