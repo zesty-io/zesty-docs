@@ -10,6 +10,12 @@ jobs:
   generate-data-for-docs:
     runs-on: ubuntu-latest
 
+    env:
+      ALGOLIA_APPID: ${{ secrets.ALGOLIA_APPID }}
+      ALGOLIA_APIKEY: ${{ secrets.ALGOLIA_APIKEY }}
+      ALGOLIA_ZESTY_ORG_INDEX: ${{ secrets.ALGOLIA_ZESTY_ORG_INDEX }}
+      GITBOOK_API_KEY: ${{ secrets.GITBOOK_API_KEY }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
