@@ -2,7 +2,7 @@ name: Generate Data for DOCS
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master", "transformer"]
 
 permissions: write-all
 
