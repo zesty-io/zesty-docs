@@ -73,7 +73,7 @@ const addToAlgolia = async (req) => {
   const gitbookTreeData = generateNavigationTree(objects);
 
   fs.writeFile(
-    "Gitbook data/gitbook-tree-data.json",
+    "Gitbook Data/gitbook.data.json",
     JSON.stringify(gitbookTreeData),
     "utf8",
     (err) => {

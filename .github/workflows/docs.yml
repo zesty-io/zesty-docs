@@ -38,4 +38,4 @@ jobs:
           git config --global user.name "Zesty Test"
           git add .
           git commit --allow-empty -m ":rocket: chore: bump Docs Data"
-          git push origin version-branch:master
+          git push origin version-branch:docs-data
