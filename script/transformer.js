@@ -74,7 +74,7 @@ const addToAlgolia = async (req) => {
 
   fs.writeFile(
     "Gitbook data/gitbook-tree-data.json",
-    gitbookTreeData,
+    JSON.stringify(gitbookTreeData),
     "utf8",
     (err) => {
       if (err) {
