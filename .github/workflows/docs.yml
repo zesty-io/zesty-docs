@@ -9,7 +9,7 @@ permissions: write-all
 jobs:
   generate-data-for-docs:
     runs-on: ubuntu-latest
-    build:
+  build:
     environment: production
 
     steps:
