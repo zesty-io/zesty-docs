@@ -36,7 +36,7 @@ jobs:
           git switch -c version-branch
           git config --global user.email "test@zesty.io"
           git config --global user.name "Zesty Test"
-          git pull origin version-branch
+          git pull origin bump-docs-data
           git add .
           git commit --allow-empty -m ":rocket: chore: bump Docs Data"
           git push origin version-branch:bump-docs-data
