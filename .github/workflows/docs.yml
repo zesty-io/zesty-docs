@@ -20,10 +20,10 @@ jobs:
           node-version: "16.x"
 
       - name: Install dependencies
-        run: npm install axios
+        run: npm install axios algoliasearch
 
       - name: Run Node function and create file
-        run: node Postman\ Collections/transformer.js
+        run: node script/transformer.js
 
       - name: Commit changes
         run: |
