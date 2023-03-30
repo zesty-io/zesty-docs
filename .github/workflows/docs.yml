@@ -33,7 +33,6 @@ jobs:
 
       - name: Commit changes
         run: |
-          git checkout -D version-branch
           git checkout -b version-branch
           git config --global user.email "test@zesty.io"
           git config --global user.name "Zesty Test"
