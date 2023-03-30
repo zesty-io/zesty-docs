@@ -33,11 +33,10 @@ jobs:
 
       - name: Commit changes
         run: |
-          git checkout main
-          git pull
+          git checkout -D version-branch
           git checkout -b version-branch
           git config --global user.email "test@zesty.io"
           git config --global user.name "Zesty Test"
           git add .
           git commit --allow-empty -m ":rocket: chore: bump Docs Data"
-          git push -u origin version-branch
+          git push -u -f origin version-branch
